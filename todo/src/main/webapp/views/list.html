@@ -1,0 +1,55 @@
+<div class="alert alert-danger" role="alert" ng-repeat="alert in alerts">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  <span ng-bind-html="alert.message"/>
+</div>
+
+
+
+<h2>All Todos</h2>
+
+<div class="pull-left">
+	Filter: <input type="text" ng-change="filter()" ng-model="filter.value" class="form-control" style="width: 200px">
+</div>
+<div class="pull-right">
+	<a class="btn btn-default" href="#/create">
+ 		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Task
+	</a>
+	<button type="button" class="btn btn-default" ng-click="generateTasks()">
+ 		<span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span> Generate Tasks
+	</button>     
+</div>
+
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Created On
+        </th>
+        <th>
+            Completed On
+        </th>
+        <th>Done</th>
+        <th></th>
+    </tr>
+    <tr class="success-{{task.done}}" ng-repeat="task in tasks track by $index">
+        <td> 
+            {{task.title}}
+        </td>
+        <td>
+            {{task.createdOn |date:'medium'}}
+        </td>
+        <td>
+            {{task.completedOn |date:'medium'}}
+        </td>
+        <td>
+            <input type="checkbox" ng-change="taskStatusChanged(task)" ng-value="task.done" ng-model="task.done">
+        </td>
+        <td>
+        	<button type="button" class="btn btn-default btn-sm" ng-click="deleteTask(task)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        </td>
+    </tr>
+</table>
